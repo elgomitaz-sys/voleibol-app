@@ -1,0 +1,107 @@
+<Marcador>:
+    orientation: "vertical"
+    padding: 20
+    spacing: 10
+
+    # ─────────── Barra superior ───────────
+    BoxLayout:
+        size_hint_y: None
+        height: 80
+
+        Label:
+            text: "SET " + root.set_actual
+            font_size: 32
+            halign: "left"
+            valign: "middle"
+            text_size: self.size
+
+        Widget:
+
+        Button:
+            text: "Set"
+            size_hint_x: None
+            width: 120
+            font_size: 20
+            on_press: root.reiniciar_set()
+
+        Button:
+            text: "Partido"
+            size_hint_x: None
+            width: 140
+            font_size: 20
+            on_press: root.reiniciar_partido()
+
+    # ─────────── Marcadores ───────────
+    BoxLayout:
+        spacing: 40
+
+        # ===== Equipo A =====
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 10
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_x: None
+                width: 100
+
+                Button:
+                    text: "+"
+                    font_size: 28
+                    on_press: root.punto_a()
+
+                Button:
+                    text: "-"
+                    font_size: 28
+                    on_press: root.restar_a()
+
+            Label:
+                text: root.puntos_a
+                font_size: 180
+                color: 1, 0, 0, 1
+                bold: True
+
+        # ===== Equipo B =====
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 10
+
+            Label:
+                text: root.puntos_b
+                font_size: 180
+                color: 0, 0, 1, 1
+                bold: True
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_x: None
+                width: 100
+
+                Button:
+                    text: "+"
+                    font_size: 28
+                    on_press: root.punto_b()
+
+                Button:
+                    text: "-"
+                    font_size: 28
+                    on_press: root.restar_b()
+
+    # ─────────── Nombres y sets ───────────
+    BoxLayout:
+        size_hint_y: None
+        height: 80
+
+        Label:
+            text: "Equipo A"
+            color: 1, 0, 0, 1
+            font_size: 28
+
+        Label:
+            text: "Sets " + root.sets_a + "  |  Sets " + root.sets_b
+            font_size: 26
+
+        Label:
+            text: "Equipo B"
+            color: 0, 0, 1, 1
+            font_size: 28
