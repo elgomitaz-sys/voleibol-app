@@ -17,19 +17,30 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Install dependencies
+    - name: Install system dependencies
       run: |
         sudo apt update
-        sudo apt install -y python3-pip python3-setuptools \
-        git zip unzip openjdk-17-jdk \
-        autoconf libtool pkg-config zlib1g-dev \
-        libncurses5-dev libncursesw5-dev libtinfo5 \
-        cmake libffi-dev libssl-dev
+        sudo apt install -y \
+          python3-pip python3-setuptools \
+          git zip unzip \
+          autoconf libtool pkg-config \
+          zlib1g-dev libncurses5-dev \
+          libncursesw5-dev libtinfo5 \
+          cmake libffi-dev libssl-dev
 
         pip3 install --upgrade pip
         pip3 install buildozer cython
 
-    - name: Build with Buildozer
+    - name: Force clean previous builds
+      run: |
+        rm -rf .buildozer
+        rm -rf bin
+
+    - name: Initialize Buildozer (install SDK)
+      run: |
+        buildozer android debug || true
+
+    - name: Build APK (second run)
       run: |
         buildozer android debug
 
